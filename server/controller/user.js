@@ -1,14 +1,15 @@
 const AddUserDetails = require('../model/model.js');
 
-const addUser = (req, res) => {
+const addUser = async (req, res) => {
     const user =req.body;
 
     const newUser = new AddUserDetails(user);
 
     try {
-        newUser.save();
+        await newUser.save();
+        res.status(201).send(newUser);
     } catch (error) {
-        
+        res.status(409).json({message: error.message});
     }
 }
 

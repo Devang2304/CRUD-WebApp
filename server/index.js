@@ -3,16 +3,16 @@ const mongoose =require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-
 const app = express();
 const PORT = 5000;
+
+app.use(cors());
 const Routes = require('./routes/route.js')
 dotenv.config();
 
 app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use('/',Routes);
-app.use(cors());
 
 const userName = process.env.DB_USERNAME;
 const password = process.env.DB_PASSWORD;
