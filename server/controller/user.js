@@ -1,6 +1,6 @@
-const AddUserDetails = require('../model/model.js');
+import AddUserDetails from '../model/model.js';
 
-const addUser = async (req, res) => {
+export const addUser = async (req, res) => {
     const user =req.body;
 
     const newUser = new AddUserDetails(user);
@@ -13,4 +13,12 @@ const addUser = async (req, res) => {
     }
 }
 
-module.exports = addUser;
+export const getUsers =async(req,res)=>{
+    try {
+        const users= await AddUserDetails.find({});
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}
+
