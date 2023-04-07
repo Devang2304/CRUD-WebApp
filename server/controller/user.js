@@ -22,3 +22,12 @@ export const getUsers =async(req,res)=>{
     }
 }
 
+export const getUser = async(req, res) => {
+    try {
+        const user = await AddUserDetails.findById(req.params.id);
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}
+
