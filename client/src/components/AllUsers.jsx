@@ -1,6 +1,28 @@
-import {Table,TableHead,TableBody,TableRow,TableCell} from '@mui/material';
+import {Table,Button,TableHead,TableBody,TableRow,TableCell,styled} from '@mui/material';
 import {getUsers} from '../api/api';
 import { useEffect,useState } from 'react';
+import { Link } from "react-router-dom";
+
+
+
+
+const StyledTable =styled(Table)`
+    width: 50%;
+    margin: 50px auto 0 auto;
+`;
+
+const THead =styled(TableRow)`
+    background-color:black;
+    & > th{
+    color:#fff;
+    font-size:20px;
+    }
+`
+const TRow =styled(TableRow)`
+& >td{
+    font-size:15px;
+}
+`
 
 
 const AllUsers=()=>{
@@ -14,29 +36,36 @@ const AllUsers=()=>{
        setUsers(response.data);
     }
     return(
-        <Table>
+        <StyledTable>
             <TableHead>
-                <TableRow>
+                <THead>
                     <TableCell>Id</TableCell>
                     <TableCell>Name</TableCell>
                     <TableCell>Phone Number</TableCell>
                     <TableCell>Email</TableCell>
                     <TableCell>Hobbies</TableCell>
-                </TableRow>
+                    <TableCell>Delete</TableCell>
+                    <TableCell>Update</TableCell>
+                </THead>
             </TableHead>
             <TableBody>
                 {
                     users.map((user)=>(
-                        <TableRow>
+                        <TRow>
+                            <TableCell>{user._id}</TableCell>
                             <TableCell>{user.name}</TableCell>
                             <TableCell>{user.phoneNumber}</TableCell>
                             <TableCell>{user.email}</TableCell>
                             <TableCell>{user.hobbies}</TableCell>
-                        </TableRow>
+                            <TableCell>
+                                <Button variant='contained' component={Link} to={`/edit/${user._id}`} >Edit</Button>
+                            </TableCell>
+                            <TableCell><Button variant='contained'color='secondary'>Delete</Button></TableCell>
+                        </TRow>
                     ))
                 }
             </TableBody>
-        </Table>
+        </StyledTable>
     );
 }
 
