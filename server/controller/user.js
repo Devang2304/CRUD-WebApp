@@ -31,3 +31,21 @@ export const getUser = async(req, res) => {
     }
 }
 
+export const editUser = async (req, res) => {
+    let user= req.body;
+    const editUser = new AddUserDetails(user);
+    try {
+        const user= await AddUserDetails.updateOne({_id : req.params.id},editUser);
+        res.status(201).json(editUser);
+    } catch (error) {
+        res.status(404).json({message:error.message});
+    }
+}
+
+export const deleteUser = async (req, res) => {
+    try {
+        const user= await AddUserDetails.deleteOne({_id : req.params.id});
+    } catch (error) {
+        res.status(404).json({message:error.message});
+    }
+}
