@@ -2,7 +2,7 @@ import { FormGroup,FormControl,InputLabel,Input,Typography,styled,Button } from 
 import { useState,useEffect } from "react";
 import { useNavigate,useParams } from 'react-router-dom';
 
-import { addUser, getUser } from "../api/api";
+import { editUser, getUser } from "../api/api";
 
 const Container=styled(FormGroup)`
 width: 50%;
@@ -29,6 +29,7 @@ const EditUser=()=>{
 
     const loadUserDetails =async ()=>{
         const response = await getUser(id);
+        setUser(response.data);
     }
 
     const onValueChange=(e)=>{
@@ -37,7 +38,7 @@ const EditUser=()=>{
     }
 
     const editUserDetails= async ()=>{
-        await addUser(user);
+        await editUser(user,id);
         navigate('/all')
     }
     
@@ -46,19 +47,19 @@ const EditUser=()=>{
             <Typography variant="h4">Edit User</Typography>
             <FormControl>
                 <InputLabel>Name</InputLabel>
-                <Input onChange={(e)=>onValueChange(e)} name="name"/>
+                <Input onChange={(e)=>onValueChange(e)} name="name" value={user.name}/>
             </FormControl>
             <FormControl>
                 <InputLabel>Phone Number</InputLabel>
-                <Input onChange={(e)=>onValueChange(e)} name="phoneNumber"/>
+                <Input onChange={(e)=>onValueChange(e)} name="phoneNumber" value={user.phoneNumber}/>
             </FormControl>
             <FormControl>
                 <InputLabel>Email</InputLabel>
-                <Input onChange={(e)=>onValueChange(e)} name="email" />
+                <Input onChange={(e)=>onValueChange(e)} name="email" value={user.email} />
             </FormControl>
             <FormControl>
                 <InputLabel>Hobbies</InputLabel>
-                <Input onChange={(e)=>onValueChange(e)} name="hobbies" />
+                <Input onChange={(e)=>onValueChange(e)} name="hobbies" value={user.hobbies} />
             </FormControl>
             <FormControl>
                 <Button variant="contained" onClick={()=>editUserDetails()}>Edit User</Button>
