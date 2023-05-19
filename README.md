@@ -65,4 +65,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 For any inquiries or feedback, please contact:
 
-Email: devangvartak2304.com
+Email: devangvartak2304@gmail.com
